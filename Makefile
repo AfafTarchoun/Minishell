@@ -6,7 +6,7 @@
 #    By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:10:29 by atarchou          #+#    #+#              #
-#    Updated: 2022/08/21 21:49:43 by atarchou         ###   ########.fr        #
+#    Updated: 2022/08/22 09:49:04 by atarchou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRCS = parser/cmd.c\
 		parser/redir.c\
 		parser/token.c\
 		parser/signals.c\
+		parser/libft_func.c\
+		parser/libft_func2.c\
 		main.c\
 
 $(NAME) : $(SRCS)

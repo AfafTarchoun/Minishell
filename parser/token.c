@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/21 21:39:26 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:10:18 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_token	*init_token(int type, char *value, char quote)
 {
-	t_token *tok;
+	t_token	*tok;
 
 	tok = (t_token *)malloc(sizeof(t_token));
 	tok->type = type;
@@ -23,21 +23,34 @@ t_token	*init_token(int type, char *value, char quote)
 	return (tok);
 }
 
+t_token	*lx_collect_spaces(t_lexer *lexer)
+{
+	char	*value;
+	char	*str;
+
+	value = (char *)malloc(sizeof(char) + 2);
+	value[0] = ' ';
+	value[1] = '\0';
+	while (isspace(lexer->c))
+		lx_advance(lexer);
+	return (init_token(SPACE, value, ' '));
+}
+
 t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token)
 {
 	lx_advance(lexer);
 	return (token);
 }
 
-t_token *lx_get_next_tok(t_lexer *lexer)
+t_token	*lx_get_next_tok(t_lexer *lexer)
 {
 	t_token	*tok;
 
 	while (lexer->c && lexer->i < strlen(lexer->str))
 	{
 		if (lexer->c == ' ' || lexer->c == 10)
-			lx_skip_ws(lexer);
-		if (isalnum(lexer->c))
+			return (lx_collect_spaces(lexer));
+		if (ft_isalnum(lexer->c))
 			return (lx_collect_str(lexer));
 		if (lexer->c == '$')
 			return (lx_collect_env(lexer));
@@ -56,5 +69,5 @@ t_token *lx_get_next_tok(t_lexer *lexer)
 			return (lx_advance_wtok(lexer, tok));
 		}
 	}
-  return (NULL);
+	return (NULL);
 }

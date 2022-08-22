@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:56:55 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/21 21:48:40 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:07:33 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	find_char_index(char *str, char c)
 	i = 0;
 	if (!str)
 		return (-2);
-	while (str[i]) 
+	while (str[i])
 	{
 		if (str[i] == c)
-		return (i);
+			return (i);
 		i++;
 	}
 	return (-2);
@@ -49,12 +49,12 @@ char	*remove_char(char *str, char charToRemmove)
 
 	i = 0;
 	len = strlen(str);
-	while (i < len) 
+	while (i < len)
 	{
-		if (str[i] == charToRemmove) 
+		if (str[i] == charToRemmove)
 		{
 			j = i;
-			while (j < len) 
+			while (j < len)
 			{
 				str[j] = str[j + 1];
 				j++;
@@ -76,10 +76,23 @@ int	count_words(char *str)
 	words = 0;
 	while (str[i])
 	{
-		if((str[i] != ' ' && str[i + 1] == ' ')
+		if ((str[i] != ' ' && str[i + 1] == ' ')
 			|| (str[i + 1] == '\0' && str[i] != ' '))
 			words++;
 		i++;
 	}
 	return (words);
+}
+
+void	delete_node(t_cmd **head, t_cmd *prev)
+{
+	t_cmd	*temp;
+
+	temp = *head;
+	if (temp != NULL)
+	{
+		*head = temp->next;
+		prev->next = *head;
+		free(temp);
+	}
 }
