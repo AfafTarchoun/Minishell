@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:06:33 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:20:06 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_lexer
 {
 	char			c;
-	unsigned int	i;
+	int				i;
 	char			*str;
 }				t_lexer;
 

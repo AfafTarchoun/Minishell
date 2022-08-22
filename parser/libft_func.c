@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:36:45 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:08:25 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:21:19 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_strdup(char *src)
 
 void	*ft_memcpy(void *str1, const void *str2, int n)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (!str1 && !str2)

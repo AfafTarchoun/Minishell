@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:10:18 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:20:55 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ t_token	*init_token(int type, char *value, char quote)
 t_token	*lx_collect_spaces(t_lexer *lexer)
 {
 	char	*value;
-	char	*str;
 
 	value = (char *)malloc(sizeof(char) + 2);
 	value[0] = ' ';
 	value[1] = '\0';
-	while (isspace(lexer->c))
+	while (ft_isspace(lexer->c))
 		lx_advance(lexer);
 	return (init_token(SPACE, value, ' '));
 }
@@ -46,7 +45,7 @@ t_token	*lx_get_next_tok(t_lexer *lexer)
 {
 	t_token	*tok;
 
-	while (lexer->c && lexer->i < strlen(lexer->str))
+	while (lexer->c && lexer->i < ft_strlen(lexer->str))
 	{
 		if (lexer->c == ' ' || lexer->c == 10)
 			return (lx_collect_spaces(lexer));

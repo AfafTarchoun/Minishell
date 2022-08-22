@@ -6,12 +6,12 @@
 #    By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:10:29 by atarchou          #+#    #+#              #
-#    Updated: 2022/08/22 09:49:04 by atarchou         ###   ########.fr        #
+#    Updated: 2022/08/22 10:19:31 by atarchou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CC = gcc #-Wall -Wextra -Werror 
+CC = gcc -Wall -Wextra -Werror 
 FLAGS =  -lreadline
 RL_FLAGS = -L /Users/atarchou/homebrew/opt/readline/lib -I /Users/atarchou/homebrew/opt/readline/include 
 SRCS = parser/cmd.c\

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 09:59:37 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:21:43 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		while (cmd)
 		{
 			printf("%s", cmd->tok->value);
-			// printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
+			printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
 			cmd = cmd->next;
 		}
 		printf("|\n");
