@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:56:55 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:29:12 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:44:57 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*remove_char(char *str, char charToRemmove)
 	int	len;
 
 	i = 0;
-	len = strlen(str);
+	len = ft_strlen(str);
 	while (i < len)
 	{
 		if (str[i] == charToRemmove)
