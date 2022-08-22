@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:07:18 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 11:25:51 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:10:39 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,6 @@ char	*append_quotes(char *value, char *str)
 			+ ft_strlen(str) + 1 * sizeof(char));
 	ft_strcat(value, str);
 	return (value);
-}
-
-void	fix_quotes(t_cmd **cmd_old)
-{
-	t_cmd	*cmd;
-	t_cmd	*prev;
-
-	cmd = *cmd_old;
-	prev = NULL;
-	while (cmd)
-	{
-		//fix redir
-		if (prev && prev->tok->quote != ' ' & cmd->tok->quote != ' ')
-		{
-			prev->tok->value = append_quotes(prev->tok->value, cmd->tok->value);
-			delete_node(&cmd, prev);
-			cmd = prev;
-		}
-		else
-			prev = cmd;
-			prev = cmd;
-		if (cmd)
-			cmd = cmd->next;
-	}
 }
 
 t_token	*lx_collect_quote(t_lexer *lexer, char quote, t_exec *exec)

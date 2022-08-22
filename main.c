@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 12:18:07 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:09:16 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int	main(int argc, char **argv, char **envp)
 		lexer = init_lx(line);
 		cmd = create_lst_cmd(lexer, &exec);
 		head = cmd;
-		fix_quotes(&cmd);
+		manage_tokens(&cmd);
 		cmd = head;
 		printf("final : |");
 		while (cmd)

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 11:27:43 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:10:47 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,30 @@ t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token)
 {
 	lx_advance(lexer);
 	return (token);
+}
+
+void	manage_tokens(t_cmd **cmd_old)
+{
+	t_cmd *cmd;
+	t_cmd *prev;
+
+	cmd = *cmd_old;
+	prev = NULL;
+	while (cmd)
+	{
+		if (prev && prev->tok->quote != ' ' && cmd->tok->quote != ' '
+			&& prev->tok->type == WORD && cmd->tok->type == WORD)
+		{
+			prev->tok->value = append_quotes(prev->tok->value, cmd->tok->value);
+			delete_node(&cmd, prev);
+			cmd = prev;
+		}
+		else
+			prev = cmd;
+		prev = cmd;
+		if (cmd)
+			cmd = cmd->next;
+	}
 }
 
 t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec)

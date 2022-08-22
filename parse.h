@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 11:41:20 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:11:00 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ t_token	*lx_collect_str(t_lexer *lexer);
 
 t_token	*lx_collect_quote(t_lexer *lexer, char quote, t_exec *exec);
 char	*append_quotes(char *value, char *str);
-void	fix_quotes(t_cmd **cmd_old);
 
 /************* redir.c ************/
 
@@ -131,6 +130,7 @@ t_token	*init_token(int type, char *value, char quote);
 t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token);
 t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec);
 t_token	*lx_collect_spaces(t_lexer *lexer);
+void	manage_tokens(t_cmd **cmd_old);
 
 /************* libft_func.c ************/
 
