@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:20:55 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:27:43 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token)
 	return (token);
 }
 
-t_token	*lx_get_next_tok(t_lexer *lexer)
+t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec)
 {
 	t_token	*tok;
 
@@ -52,9 +52,9 @@ t_token	*lx_get_next_tok(t_lexer *lexer)
 		if (ft_isalnum(lexer->c))
 			return (lx_collect_str(lexer));
 		if (lexer->c == '$')
-			return (lx_collect_env(lexer));
+			return (lx_collect_env(lexer, exec));
 		if (lexer->c == '\"' || lexer->c == '\'')
-			return (lx_collect_quote(lexer, lexer->c));
+			return (lx_collect_quote(lexer, lexer->c, exec));
 		if (lexer->c == '>' || lexer->c == '<')
 			return (lx_collect_redirs(lexer, lexer->c));
 		if (lexer->c == '|')

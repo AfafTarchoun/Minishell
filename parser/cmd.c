@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:08:08 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:01:42 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:28:55 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ t_cmd	*init_cmd(t_token *tok)
 	return (cmd);
 }
 
-t_cmd	*create_lst_cmd(t_lexer *lexer)
+t_cmd	*create_lst_cmd(t_lexer *lexer, t_exec *exec)
 {
 	t_token	*tok;
 	t_cmd	*cmd;
 	t_cmd	*head;
 
-	tok = lx_get_next_tok(lexer);
+	tok = lx_get_next_tok(lexer, exec);
 	if (tok != NULL)
 	{
 		cmd = init_cmd(tok);
@@ -35,7 +35,7 @@ t_cmd	*create_lst_cmd(t_lexer *lexer)
 	}
 	while (tok)
 	{
-		tok = lx_get_next_tok(lexer);
+		tok = lx_get_next_tok(lexer, exec);
 		if (tok != NULL)
 		{
 			cmd->next = init_cmd(tok);

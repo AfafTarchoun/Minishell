@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:20:06 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:41:20 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,34 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include <unistd.h>
+
+typedef struct s_env
+{
+	int	exit_value;
+}			t_env;
+
+typedef struct s_exec
+{
+	int		in;
+	int		args;
+	t_env	env;
+	char	**envp;
+	char	**command;
+	int		pipe_flag;
+	int		pipe_count;
+	int		input_flag;
+	int		error_flag;
+	int		input_count;
+	int		append_flag;
+	int		initial_flag;
+	int		heredoc_flag;
+	int		append_count;
+	int		heredoc_count;
+	int		redirecion_flag;
+	int		redirection_count;
+	int		pipe_index;
+	int		err_flag;
+}	t_exec;
 
 typedef struct s_lexer
 {
@@ -55,15 +83,15 @@ typedef struct s_cmd
 /************* cmd.c ************/
 
 t_cmd	*init_cmd(t_token *tok);
-t_cmd	*create_lst_cmd(t_lexer *lexer);
+t_cmd	*create_lst_cmd(t_lexer *lexer, t_exec *exec);
 
 /************* env_expand.c ************/
 
-char	*expand_env(char *str, char quote);
-t_token	*lx_collect_env(t_lexer *lexer);
+char	*expand_env(char *str, char quote, t_exec *exec);
+t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec);
 char	*find_str_env(char *str);
 char	*replace_env(char *str, char *find, char *replace);
-char	*expand_env_word(char *str, char quote);
+char	*expand_env_word(char *str, char quote, t_exec *exec);
 
 /************* help_func.c ************/
 
@@ -83,7 +111,7 @@ t_token	*lx_collect_str(t_lexer *lexer);
 
 /************* quotes.c ************/
 
-t_token	*lx_collect_quote(t_lexer *lexer, char quote);
+t_token	*lx_collect_quote(t_lexer *lexer, char quote, t_exec *exec);
 char	*append_quotes(char *value, char *str);
 void	fix_quotes(t_cmd **cmd_old);
 
@@ -101,7 +129,7 @@ void	ft_signals(void);
 
 t_token	*init_token(int type, char *value, char quote);
 t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token);
-t_token	*lx_get_next_tok(t_lexer *lexer);
+t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec);
 t_token	*lx_collect_spaces(t_lexer *lexer);
 
 /************* libft_func.c ************/
@@ -117,5 +145,9 @@ char	*ft_strcpy(char *dest, char *src);
 int		ft_isalnum(int s);
 int		ft_isspace(int c);
 char	*ft_strcat(char *dest, char *src);
+int		ft_strcmp(char *s1, char *s2);
+
+
+char	*ft_expand(char *expand, char **envp);
 
 #endif

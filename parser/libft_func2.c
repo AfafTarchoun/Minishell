@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:44:15 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:08:49 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:40:33 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ char	*ft_strcat(char *dest, char *src)
 	}
 	dest[i + j] = '\0';
 	return (dest);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
 }

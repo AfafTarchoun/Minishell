@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:09:23 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:39:23 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:25:18 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,21 @@ char	*replace_env(char *str, char *find, char *replace)
 	return (result);
 }
 
-char	*expand_env_word(char *str, char quote)
+char	*expand_env_word(char *str, char quote, t_exec *exec)
 {
 	char	*tmp;
 
 	if (quote != '\'')
 	{
 		tmp = str;
-		str = ft_strdup("/EXPAND/");
+		// str = ft_strdup("/EXPAND/");
+		str = ft_expand(str, exec->envp);
 		free(tmp);
 	}
 	return (str);
 }
 
-char	*expand_env(char *str, char quote)
+char	*expand_env(char *str, char quote, t_exec *exec)
 {
 	char	*tmp;
 	char	*env;
@@ -116,7 +117,8 @@ char	*expand_env(char *str, char quote)
 		{
 			env = find_str_env(str);
 			tmp = env;
-			env = ft_strdup("EXPAND/EXAMPLE/LOL");
+			// env = ft_strdup("EXPAND/EXAMPLE/LOL");
+			env = ft_expand(env, exec->envp);
 			str = replace_env(str, tmp, env);
 			free(tmp);
 		}
@@ -124,7 +126,7 @@ char	*expand_env(char *str, char quote)
 	return (str);
 }
 
-t_token	*lx_collect_env(t_lexer *lexer)
+t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec)
 {
 	char	*value;
 	char	*str;
@@ -140,6 +142,6 @@ t_token	*lx_collect_env(t_lexer *lexer)
 		lx_advance(lexer);
 	}
 	if (find_char_index(value, '$') != -2)
-		value = expand_env_word(value, 0);
+		value = expand_env_word(value, 0, exec);
 	return (init_token(WORD, value, 0));
 }
