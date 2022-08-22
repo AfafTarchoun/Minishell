@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 11:40:28 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 12:18:07 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_get_env(t_exec *exec, char **env)
 	exec->envp = malloc(sizeof(char *) * (ft_count_elements(env) + 2));
 	while (i < ft_count_elements(env))
 	{
-		exec->envp[i] = strdup(env[i]);
+		exec->envp[i] = ft_strdup(env[i]);
 		i++;
 	}
 	exec->envp[i] = 0;

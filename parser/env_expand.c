@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:09:23 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 11:25:18 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:04:31 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,12 @@ t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec)
 
 	value = (char *)malloc(sizeof(char) + 1);
 	value[0] = '\0';
-	while (ft_isalnum(lexer->c) || lexer->c == '$')
+	str = lx_getchar_as_str(lexer);
+	value = ft_realloc(value, ft_strlen(value)
+			+ ft_strlen(str) + 1 * sizeof(char));
+	ft_strcat(value, str);
+	lx_advance(lexer);
+	while (ft_isalnum(lexer->c))
 	{
 		str = lx_getchar_as_str(lexer);
 		value = ft_realloc(value, ft_strlen(value)
