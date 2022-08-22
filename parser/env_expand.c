@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:09:23 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:11:05 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:39:23 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ t_token	*lx_collect_env(t_lexer *lexer)
 		lx_advance(lexer);
 	}
 	if (find_char_index(value, '$') != -2)
-		value = expand_env(value, 0);
+		value = expand_env_word(value, 0);
 	return (init_token(WORD, value, 0));
 }
