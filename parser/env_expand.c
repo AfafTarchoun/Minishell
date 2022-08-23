@@ -6,17 +6,16 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:09:23 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 13:04:31 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:32:57 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
 
-char	*find_str_env(char *str)
+int	get_env_size(char *str)
 {
-	char	*env;
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -33,8 +32,18 @@ char	*find_str_env(char *str)
 		}
 		i++;
 	}
-	env = (char *)malloc(sizeof(char) * len + 1);
+	return (len);
+}
+
+char	*find_str_env(char *str)
+{
+	char	*env;
+	int		i;
+	int		len;
+
 	i = 0;
+	len = get_env_size(str);
+	env = (char *)malloc(sizeof(char) * len + 1);
 	len = 0;
 	while (str[i])
 	{
@@ -54,16 +63,14 @@ char	*find_str_env(char *str)
 	return (env);
 }
 
-char	*replace_env(char *str, char *find, char *replace)
+int	get_count(char *str, char *find, int *io)
 {
-	char	*result;
-	int		i;
-	int		count;
-	int		newlen;
-	int		oldlen;
+	int	i;
+	int	count;
+	int	oldlen;
 
 	count = 0;
-	newlen = ft_strlen(replace);
+	i = *io;
 	oldlen = ft_strlen(find);
 	i = 0;
 	while (str[i])
@@ -75,18 +82,33 @@ char	*replace_env(char *str, char *find, char *replace)
 		}
 		i++;
 	}
-	result = (char *)malloc(i + count * (newlen - oldlen) + 1);
+	*io = i;
+	return (count);
+}
+
+char	*replace_env(char *str, char *find, char *replace)
+{
+	char	*result;
+	int		i;
+	int		lens[3];
+
+	lens[0] = 0;
+	lens[1] = ft_strlen(replace);
+	lens[2] = ft_strlen(find);
+	i = 0;
+	lens[0] = get_count(str, find, &i);
+	result = (char *)malloc(i + lens[0] * (lens[1] - lens[2]) + 1);
 	i = 0;
 	while (*str)
 	{
 		if (ft_strstr(str, find) == str)
 		{
 			ft_strcpy(&result[i], replace);
-			i += newlen;
-			str += oldlen;
+			i += lens[1];
+			str += lens[2];
 		}
 		else
-			result[i++] = *str++;
+		result[i++] = *str++;
 	}
 	result[i] = '\0';
 	return (result);
@@ -99,54 +121,8 @@ char	*expand_env_word(char *str, char quote, t_exec *exec)
 	if (quote != '\'')
 	{
 		tmp = str;
-		// str = ft_strdup("/EXPAND/");
 		str = ft_expand(str, exec->envp);
 		free(tmp);
 	}
 	return (str);
-}
-
-char	*expand_env(char *str, char quote, t_exec *exec)
-{
-	char	*tmp;
-	char	*env;
-
-	if (quote == '\"')
-	{
-		while (find_char_index(str, '$') != -2)
-		{
-			env = find_str_env(str);
-			tmp = env;
-			// env = ft_strdup("EXPAND/EXAMPLE/LOL");
-			env = ft_expand(env, exec->envp);
-			str = replace_env(str, tmp, env);
-			free(tmp);
-		}
-	}
-	return (str);
-}
-
-t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec)
-{
-	char	*value;
-	char	*str;
-
-	value = (char *)malloc(sizeof(char) + 1);
-	value[0] = '\0';
-	str = lx_getchar_as_str(lexer);
-	value = ft_realloc(value, ft_strlen(value)
-			+ ft_strlen(str) + 1 * sizeof(char));
-	ft_strcat(value, str);
-	lx_advance(lexer);
-	while (ft_isalnum(lexer->c))
-	{
-		str = lx_getchar_as_str(lexer);
-		value = ft_realloc(value, ft_strlen(value)
-				+ ft_strlen(str) + 1 * sizeof(char));
-		ft_strcat(value, str);
-		lx_advance(lexer);
-	}
-	if (find_char_index(value, '$') != -2)
-		value = expand_env_word(value, 0, exec);
-	return (init_token(WORD, value, 0));
 }

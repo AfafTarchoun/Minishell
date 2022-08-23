@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:56:55 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 10:44:57 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/23 21:37:43 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	delete_node(t_cmd **head, t_cmd *prev)
 	{
 		*head = temp->next;
 		prev->next = *head;
+		free(temp->tok->value);
+		free(temp->tok);
 		free(temp);
 	}
 }

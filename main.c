@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 13:09:16 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:29:21 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,32 +124,6 @@ void	ft_get_env(t_exec *exec, char **env)
 	exec->env.exit_value = 0;
 }
 
-char	*ft_expand(char *expand, char **envp)
-{
-	int		i;
-	char	*xtemp;
-
-	i = 0;
-	if (expand[0] != '$')
-		return (ft_mystrdup(expand, 0));
-	if (expand != NULL)
-	{
-		while (envp[i])
-		{
-			xtemp = ft_get_expand_env(envp[i]);
-			if (ft_strcmp(expand + 1, xtemp) == 0)
-			{
-				free(xtemp);
-				return (ft_mystrdup(envp[i]
-						+ ft_find_last_character(envp[i], '=') + 1, 0));
-			}
-				i++;
-			free(xtemp);
-		}
-	}
-	return (ft_mystrdup("", 0));
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	char *line;
@@ -168,19 +142,27 @@ int	main(int argc, char **argv, char **envp)
 		if (line == NULL)
 			exit(0);
 		add_history(line);
-		lexer = init_lx(line);
-		cmd = create_lst_cmd(lexer, &exec);
-		head = cmd;
-		manage_tokens(&cmd);
-		cmd = head;
-		printf("final : |");
-		while (cmd)
+		if (check_line_correctness(line))
 		{
-			//printf("%s", cmd->tok->value);
-			 printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
-			cmd = cmd->next;
+			lexer = init_lx(line);
+			cmd = create_lst_cmd(lexer, &exec);
+			//free(lexer->str);
+			free(lexer);
+			head = cmd;
+			manage_tokens(&cmd);
+			cmd = head;
+			//  PRINTING
+			printf("Final :|");
+			while (cmd)
+			{
+				printf("%s", cmd->tok->value);
+				//printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
+				cmd = cmd->next;
+			}
+			printf("|\n");
+			//////////////
+			free_cmd(&head);
 		}
-		printf("|\n");
 		free(line);
 	}
 }

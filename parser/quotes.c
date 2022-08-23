@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:07:18 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 13:10:39 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:30:47 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_token	*lx_collect_quote(t_lexer *lexer, char quote, t_exec *exec)
 		value = ft_realloc(value, ft_strlen(value)
 				+ ft_strlen(str) + 1 * sizeof(char));
 		ft_strcat(value, str);
+		free(str);
 		lx_advance(lexer);
 	}
 	if (lexer->c == quote)

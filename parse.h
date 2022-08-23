@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 13:11:00 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:05:55 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef enum e_type
 	APPEND,
 	HEREDOC,
 	PIPE,
+	SPECIALCHAR,
 	EQUALS
 }				t_type;
 
@@ -87,11 +88,17 @@ t_cmd	*create_lst_cmd(t_lexer *lexer, t_exec *exec);
 
 /************* env_expand.c ************/
 
-char	*expand_env(char *str, char quote, t_exec *exec);
-t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec);
+int		get_count(char *str, char *find, int *io);
+int		get_env_size(char *str);
 char	*find_str_env(char *str);
 char	*replace_env(char *str, char *find, char *replace);
 char	*expand_env_word(char *str, char quote, t_exec *exec);
+
+/************* env_expand1.c ************/
+
+char	*ft_expand(char *expand, char **envp);
+char	*expand_env(char *str, char quote, t_exec *exec);
+t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec);
 
 /************* help_func.c ************/
 
@@ -117,6 +124,7 @@ char	*append_quotes(char *value, char *str);
 /************* redir.c ************/
 
 t_token	*lx_collect_redirs(t_lexer *lexer, char redir);
+int		is_op(char c);
 
 /************* signals.c ************/
 
@@ -130,6 +138,7 @@ t_token	*init_token(int type, char *value, char quote);
 t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token);
 t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec);
 t_token	*lx_collect_spaces(t_lexer *lexer);
+t_token	*lx_handle_operations(t_lexer *lexer);
 void	manage_tokens(t_cmd **cmd_old);
 
 /************* libft_func.c ************/
@@ -147,7 +156,30 @@ int		ft_isspace(int c);
 char	*ft_strcat(char *dest, char *src);
 int		ft_strcmp(char *s1, char *s2);
 
+/************* free_func.c ************/
 
-char	*ft_expand(char *expand, char **envp);
+void	free_cmd(t_cmd **cmd);
 
+/************* redir_quote_valid.c ************/
+
+void	ignore_inside_quotes(char str, int *value, int *flag);
+int		validate_pipes(char *str);
+int		check_line_correctness(char *str);
+
+/************* redir_quote_valid1.c ************/
+
+int		validate_repetition(char *str, char redir1, char redir2);
+int		validate_redirs(char *str);
+int		validate_quote_type(char *str, char quote1, char quote2);
+int		validate_quotes(char *str);
+
+/************* parsing.c ************/
+
+void	ft_get_env(t_exec *exec, char **env);
+int		ft_count_elements(char **str);
+char	*ft_mystrdup(char *s1, int flag);
+char	*ft_mystrdu_norm(char *str, char *s1, int i, int j);
+char	*ft_get_expand_env(char *str);
+int		ft_find_variable_index(char *str, char c);
+int		ft_find_last_character(char *str, char c);
 #endif

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:08:08 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 11:28:55 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/23 21:50:37 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_cmd	*create_lst_cmd(t_lexer *lexer, t_exec *exec)
 	t_cmd	*cmd;
 	t_cmd	*head;
 
+	head = NULL;
 	tok = lx_get_next_tok(lexer, exec);
 	if (tok != NULL)
 	{

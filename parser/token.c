@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 13:10:47 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:34:46 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token)
 
 void	manage_tokens(t_cmd **cmd_old)
 {
-	t_cmd *cmd;
-	t_cmd *prev;
+	t_cmd	*cmd;
+	t_cmd	*prev;
 
 	cmd = *cmd_old;
 	prev = NULL;
@@ -79,16 +79,11 @@ t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec)
 			return (lx_collect_env(lexer, exec));
 		if (lexer->c == '\"' || lexer->c == '\'')
 			return (lx_collect_quote(lexer, lexer->c, exec));
-		if (lexer->c == '>' || lexer->c == '<')
-			return (lx_collect_redirs(lexer, lexer->c));
-		if (lexer->c == '|')
+		if (is_op(lexer->c))
+			return (lx_handle_operations(lexer));
+		if (!ft_isalnum(lexer->c) && !is_op(lexer->c))
 		{
-			tok = init_token(PIPE, lx_getchar_as_str(lexer), 0);
-			return (lx_advance_wtok(lexer, tok));
-		}
-		if (lexer->c == '=')
-		{
-			tok = init_token(EQUALS, lx_getchar_as_str(lexer), 0);
+			tok = init_token(SPECIALCHAR, lx_getchar_as_str(lexer), 0);
 			return (lx_advance_wtok(lexer, tok));
 		}
 	}

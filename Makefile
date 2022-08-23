@@ -6,7 +6,7 @@
 #    By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:10:29 by atarchou          #+#    #+#              #
-#    Updated: 2022/08/22 11:35:16 by atarchou         ###   ########.fr        #
+#    Updated: 2022/08/23 22:03:38 by atarchou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ FLAGS =  -lreadline
 RL_FLAGS = -L /Users/atarchou/homebrew/opt/readline/lib -I /Users/atarchou/homebrew/opt/readline/include 
 SRCS = parser/cmd.c\
 		parser/env_expand.c\
+		parser/env_expand1.c\
 		parser/help_func.c\
 		parser/lexer.c\
 		parser/quotes.c\
@@ -24,6 +25,9 @@ SRCS = parser/cmd.c\
 		parser/signals.c\
 		parser/libft_func.c\
 		parser/libft_func2.c\
+		parser/free_func.c\
+		parser/redir_quote_valid.c\
+		parser/redir_quote_valid1.c\
 		main.c\
 
 $(NAME) : $(SRCS)
