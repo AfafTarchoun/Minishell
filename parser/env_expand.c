@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:09:23 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/23 22:32:57 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/24 09:32:36 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	get_env_size(char *str)
 	{
 		if (str[i] == '$')
 		{
-			while (str[i] != ' ' && str[i])
+			len++;
+			i++;
+			while (ft_isalnum(str[i]) && str[i])
 			{
 				len++;
 				i++;
@@ -49,7 +51,8 @@ char	*find_str_env(char *str)
 	{
 		if (str[i] == '$')
 		{
-			while (str[i] != ' ' && str[i])
+			env[len++] = str[i++];
+			while (ft_isalnum(str[i]) && str[i])
 			{
 				env[len] = str[i];
 				len++;

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/23 22:05:55 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/24 09:35:16 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ t_token	*lx_collect_str(t_lexer *lexer);
 
 t_token	*lx_collect_quote(t_lexer *lexer, char quote, t_exec *exec);
 char	*append_quotes(char *value, char *str);
+char	*allocate(char *value, char *str);
 
 /************* redir.c ************/
 
