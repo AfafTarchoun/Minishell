@@ -146,7 +146,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			lexer = init_lx(line);
 			cmd = create_lst_cmd(lexer, &exec);
-			//free(lexer->str);
+			free(lexer->str);
 			free(lexer);
 			head = cmd;
 			manage_tokens(&cmd);
@@ -163,6 +163,7 @@ int	main(int argc, char **argv, char **envp)
 			//////////////
 			free_cmd(&head);
 		}
-		free(line);
+		else
+			free(line);
 	}
 }
