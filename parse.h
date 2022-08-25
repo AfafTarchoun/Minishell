@@ -65,7 +65,8 @@ typedef enum e_type
 	HEREDOC,
 	PIPE,
 	SPECIALCHAR,
-	EQUALS
+	EQUALS,
+	SPACE
 }				t_type;
 
 typedef struct s_token
