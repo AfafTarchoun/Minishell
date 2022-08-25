@@ -100,3 +100,17 @@ void	delete_node(t_cmd **head, t_cmd *prev)
 		free(temp);
 	}
 }
+
+char *replace_char(char *str, char ori, char rep) 
+{
+  int i;
+
+  i = 0;
+  while (str[i]) 
+  {
+    if (str[i] == ori)
+      str[i] = rep;
+    i++;
+  }
+  return (str);
+}
