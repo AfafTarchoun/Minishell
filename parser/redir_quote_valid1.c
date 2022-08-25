@@ -87,3 +87,70 @@ int	validate_quotes(char *str)
 		return (0);
 	return (1);
 }
+
+int validate_rep_pipe(char *str)
+{
+  int i;
+  int count;
+
+  i = 0;
+  while (str[i])
+  {
+    if (str[i] == '|')
+    {
+      i++;
+      while (str[i] == ' ')
+        i++;
+      if (!isalnum(str[i]))
+          return (0);
+      else if (!isalnum(str[i]))
+        return (0);
+    }
+    i++;
+  }
+  return (1);
+}
+
+int validate_rep_redir(char *str, char redir)
+{
+  int i;
+  int count;
+
+  i = 0;
+  while (str[i])
+  {
+    if (str[i] == redir && str[i + 1] != redir)
+    {
+      i++;
+      while (str[i] == ' ')
+        i++;
+      if (!isalnum(str[i]))
+          return (0);
+      else if (!isalnum(str[i]))
+        return (0);
+    }
+    else if (str[i] == redir && str[i + 1] == redir)
+    {
+      i = i + 2;
+      while (str[i] == ' ')
+        i++;
+      if (!isalnum(str[i]))
+          return (0);
+      else if (!isalnum(str[i]))
+        return (0);
+    }
+    i++;
+  }
+  return (1);
+}
+
+int validate_line(char *str)
+{
+  if (!validate_rep_pipe(str))
+    return (0);
+  if (!validate_rep_redir(str, '>'))
+    return (0);
+  if (!validate_rep_redir(str, '<'))
+    return (0);
+  return (1);
+}
