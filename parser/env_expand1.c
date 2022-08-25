@@ -45,7 +45,7 @@ void handle_env_replace(char **str, char *env, int flag)
 
   tmp = env;
   if (flag == 1)
-    env = strdup("EXPAND/EXAMPLE/LOL");
+    env = ft_expand(env, exec->envp);
   else if (flag == 0)
     env = strdup("\200");
   placeholder = *str;
