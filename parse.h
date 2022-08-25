@@ -173,6 +173,7 @@ int		validate_repetition(char *str, char redir1, char redir2);
 int		validate_redirs(char *str);
 int		validate_quote_type(char *str, char quote1, char quote2);
 int		validate_quotes(char *str);
+int		validate_line(char *str);
 
 /************* parsing.c ************/
 
