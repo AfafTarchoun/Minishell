@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/24 09:35:16 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:03:40 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef enum e_type
 	PIPE,
 	SPECIALCHAR,
 	EQUALS,
-	SPACE
+	W_SPACE,
 }				t_type;
 
 typedef struct s_token

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:58:06 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/24 09:34:23 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:20:46 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,42 +38,40 @@ char	*ft_expand(char *expand, char **envp)
 	return (ft_mystrdup("", 0));
 }
 
-void handle_env_replace(char **str, char *env, int flag)
+void	handle_env_replace(char **str, char *env, int flag, t_exec *exec)
 {
-  char *tmp;
-  char *placeholder;
+	char	*tmp;
+	char	*placeholder;
 
-  tmp = env;
-  if (flag == 1)
-    env = ft_expand(env, exec->envp);
-  else if (flag == 0)
-    env = strdup("\200");
-  placeholder = *str;
-  *str = replace_env(*str, tmp, env);
-  free(tmp);
-  free(env);
-  free(placeholder);
+	tmp = env;
+	if (flag == 1)
+		env = ft_expand(env, exec->envp);
+	else if (flag == 0)
+		env = strdup("\200");
+	placeholder = *str;
+	*str = replace_env(*str, tmp, env);
+	free(tmp);
+	free(env);
+	free(placeholder);
 }
 
-char *expand_env(char *str, char quote, t_exec *exec)
+char	*expand_env(char *str, char quote, t_exec *exec)
 {
-  char *tmp;
-  char *env;
-  char *placeholder;
-  
-  if (quote == '\"')
-  {
-    while (find_char_index(str, '$') != -2)
-    {
-      env = find_str_env(str);
-      if (env[1] != '\0')
-        handle_env_replace(&str, env, 1);
-      else
-        handle_env_replace(&str, env, 0);
-    }
-    str = replace_char(str, '\200', '$');
-  }
-  return (str);
+	char	*env;
+
+	if (quote == '\"')
+	{
+		while (find_char_index(str, '$') != -2)
+		{
+			env = find_str_env(str);
+			if (env[1] != '\0')
+				handle_env_replace(&str, env, 1, exec);
+			else
+				handle_env_replace(&str, env, 0, exec);
+		}
+		str = replace_char(str, '\200', '$');
+	}
+	return (str);
 }
 
 /*

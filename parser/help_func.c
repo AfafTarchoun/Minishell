@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:56:55 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/23 21:37:43 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:21:55 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,4 @@ void	delete_node(t_cmd **head, t_cmd *prev)
 		free(temp->tok);
 		free(temp);
 	}
-}
-
-char *replace_char(char *str, char ori, char rep) 
-{
-  int i;
-
-  i = 0;
-  while (str[i]) 
-  {
-    if (str[i] == ori)
-      str[i] = rep;
-    i++;
-  }
-  return (str);
 }

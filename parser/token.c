@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/23 22:34:46 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:03:59 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_token	*lx_collect_spaces(t_lexer *lexer)
 	value[1] = '\0';
 	while (ft_isspace(lexer->c))
 		lx_advance(lexer);
-	return (init_token(SPACE, value, ' '));
+	return (init_token(W_SPACE, value, ' '));
 }
 
 t_token	*lx_advance_wtok(t_lexer *lexer, t_token *token)

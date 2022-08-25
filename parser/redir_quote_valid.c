@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/23 22:34:15 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:20:29 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,27 @@ int	validate_pipes(char *str)
 	return (1);
 }
 
-int check_line_correctness(char *str)
+int	check_line_correctness(char *str)
 {
-  if (!validate_pipes(str))
-  {
-    printf("WARNING : |PIPE| Invalid\n");
-    return (0);
-  }
-  else if (!validate_redirs(str))
-  {
-    printf("WARNING : <REDIRS> Invalid\n");
-    return (0);
-  }
-  else if (!validate_quotes(str))
-  {
-    printf("WARNING : \"'QUOTES'\" Invalid\n");
-    return (0);
-  }
-  else if (!validate_line(str))
-  {
-    printf("WARNING : syntax error\n");
-    return (0);
-  }
-  return (1);
+	if (!validate_pipes(str))
+	{
+		printf("WARNING : |PIPE| Invalid\n");
+		return (0);
+	}
+	else if (!validate_redirs(str))
+	{
+		printf("WARNING : <REDIRS> Invalid\n");
+		return (0);
+	}
+	else if (!validate_quotes(str))
+	{
+		printf("WARNING : \"'QUOTES'\" Invalid\n");
+		return (0);
+	}
+	else if (!validate_line(str))
+	{
+		printf("WARNING : syntax error\n");
+		return (0);
+	}
+	return (1);
 }

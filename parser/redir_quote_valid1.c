@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:52:57 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/23 22:34:30 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:19:44 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,71 +86,4 @@ int	validate_quotes(char *str)
 	else if (!validate_quote_type(str, '\'', '\"'))
 		return (0);
 	return (1);
-}
-
-int validate_rep_pipe(char *str)
-{
-  int i;
-  int count;
-
-  i = 0;
-  while (str[i])
-  {
-    if (str[i] == '|')
-    {
-      i++;
-      while (str[i] == ' ')
-        i++;
-      if (!isalnum(str[i]))
-          return (0);
-      else if (!isalnum(str[i]))
-        return (0);
-    }
-    i++;
-  }
-  return (1);
-}
-
-int validate_rep_redir(char *str, char redir)
-{
-  int i;
-  int count;
-
-  i = 0;
-  while (str[i])
-  {
-    if (str[i] == redir && str[i + 1] != redir)
-    {
-      i++;
-      while (str[i] == ' ')
-        i++;
-      if (!isalnum(str[i]))
-          return (0);
-      else if (!isalnum(str[i]))
-        return (0);
-    }
-    else if (str[i] == redir && str[i + 1] == redir)
-    {
-      i = i + 2;
-      while (str[i] == ' ')
-        i++;
-      if (!isalnum(str[i]))
-          return (0);
-      else if (!isalnum(str[i]))
-        return (0);
-    }
-    i++;
-  }
-  return (1);
-}
-
-int validate_line(char *str)
-{
-  if (!validate_rep_pipe(str))
-    return (0);
-  if (!validate_rep_redir(str, '>'))
-    return (0);
-  if (!validate_rep_redir(str, '<'))
-    return (0);
-  return (1);
 }
