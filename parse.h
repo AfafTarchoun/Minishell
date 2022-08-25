@@ -107,6 +107,7 @@ int		find_char_index(char *str, char c);
 char	*remove_char(char *str, char charToRemmove);
 int		count_words(char *str);
 void	delete_node(t_cmd **head, t_cmd *prev);
+char	*replace_char(char *str, char ori, char rep);
 
 /************* lexer.c ************/
 
