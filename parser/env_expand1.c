@@ -55,7 +55,7 @@ void handle_env_replace(char **str, char *env, int flag)
   free(placeholder);
 }
 
-char *expand_env(char *str, char quote)
+char *expand_env(char *str, char quote, t_exec *exec)
 {
   char *tmp;
   char *env;
