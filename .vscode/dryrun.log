@@ -1,0 +1,5 @@
+make: Entering directory `/Users/atarchou/Desktop/parsing-minishell'
+stty -echoctl
+gcc -Wall -Wextra -Werror  parser/cmd.c parser/env_expand.c parser/env_expand1.c parser/help_func.c parser/help_func1.c parser/lexer.c parser/quotes.c parser/redir.c parser/token.c parser/line_validation.c parser/signals.c parser/libft_func.c parser/libft_func2.c parser/free_func.c parser/redir_quote_valid.c parser/redir_quote_valid1.c main.c  -L /Users/atarchou/homebrew/opt/readline/lib -I /Users/atarchou/homebrew/opt/readline/include  -lreadline -o minishell 
+make: Leaving directory `/Users/atarchou/Desktop/parsing-minishell'
+ 

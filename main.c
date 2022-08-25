@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/25 20:14:59 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:36:00 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,8 @@ int	main(int argc, char **argv, char **envp)
 			while (cmd)
 			{
 				//comment either the first printf if you want the whole output line or comment the second printf if you want to see token by token
-				//printf("%s", cmd->tok->value);
-				printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
+				printf("%s", cmd->tok->value);
+				//printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
 				cmd = cmd->next;
 			}
 			printf("|\n");
