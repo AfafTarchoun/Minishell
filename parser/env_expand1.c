@@ -38,6 +38,45 @@ char	*ft_expand(char *expand, char **envp)
 	return (ft_mystrdup("", 0));
 }
 
+void handle_env_replace(char **str, char *env, int flag)
+{
+  char *tmp;
+  char *placeholder;
+
+  tmp = env;
+  if (flag == 1)
+    env = strdup("EXPAND/EXAMPLE/LOL");
+  else if (flag == 0)
+    env = strdup("\200");
+  placeholder = *str;
+  *str = replace_env(*str, tmp, env);
+  free(tmp);
+  free(env);
+  free(placeholder);
+}
+
+char *expand_env(char *str, char quote)
+{
+  char *tmp;
+  char *env;
+  char *placeholder;
+  
+  if (quote == '\"')
+  {
+    while (find_char_index(str, '$') != -2)
+    {
+      env = find_str_env(str);
+      if (env[1] != '\0')
+        handle_env_replace(&str, env, 1);
+      else
+        handle_env_replace(&str, env, 0);
+    }
+    str = replace_char(str, '\200', '$');
+  }
+  return (str);
+}
+
+/*
 char	*expand_env(char *str, char quote, t_exec *exec)
 {
 	char	*tmp;
@@ -59,7 +98,7 @@ char	*expand_env(char *str, char quote, t_exec *exec)
 		}
 	}
 	return (str);
-}
+}*/
 
 t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec)
 {
