@@ -12,26 +12,36 @@
 
 #include "../parse.h"
 
-int	validate_rep_pipe(char *str)
-{
-	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '|')
-		{
-			i++;
-			while (str[i] == ' ')
-				i++;
-			if (!ft_isalnum(str[i]))
-				return (0);
-			else if (!ft_isalnum(str[i]))
-				return (0);
-		}
-		i++;
-	}
-	return (1);
+int validate_rep_pipe(char *str)
+{
+  int i;
+  int count;
+
+  i = 0;
+  count = 0;
+  while (str[i])
+  {
+    if (str[i] == '\"' || str[i] == '\'')
+      count++;
+    if (count == 2)
+      count = 0;
+    if (count == 0)
+    {
+      if (str[i] == '|')
+      {
+        i++;
+        while (str[i] == ' ')
+          i++;
+        if (!ft_isalnum(str[i]))
+            return (0);
+        else if (!ft_isalnum(str[i]))
+          return (0);
+      }
+    }
+    i++;
+  }
+  return (1);
 }
 
 int	handle_repitition(char *str, int *i)
@@ -45,28 +55,37 @@ int	handle_repitition(char *str, int *i)
 	return (1);
 }
 
-int	validate_rep_redir(char *str, char redir)
+int validate_rep_redir(char *str, char redir)
 {
-	int	i;
+  int i;
+  int count;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == redir && str[i + 1] != redir)
-		{
-			i++;
-			if (handle_repitition(str, &i) == 0)
-				return (0);
-		}
-		else if (str[i] == redir && str[i + 1] == redir)
-		{
-			i = i + 2;
-			if (handle_repitition(str, &i) == 0)
-				return (0);
-		}
-		i++;
-	}
-	return (1);
+  i = 0;
+  count = 0;
+  while (str[i])
+  {
+    if (str[i] == '\"' || str[i] == '\'')
+      count++;
+    if (count == 2)
+      count = 0;
+    if (count == 0)
+    {
+      if (str[i] == redir && str[i + 1] != redir)
+      {
+        i++;
+        if (handle_repitition(str, &i) == 0)
+          return (0);
+      }
+      else if (str[i] == redir && str[i + 1] == redir)
+      {
+        i = i + 2;
+        if (handle_repitition(str, &i) == 0)
+          return (0);
+      }
+    }
+    i++;
+  }
+  return (1);
 }
 
 int	validate_line(char *str)
