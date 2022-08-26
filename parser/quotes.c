@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:07:18 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/24 09:35:09 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:15:29 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,7 @@ t_token	*lx_collect_quote(t_lexer *lexer, char quote, t_exec *exec)
 		return (init_token(WORD, value, quote));
 	}
 	while (lexer->c != quote)
-	{
-		str = lx_getchar_as_str(lexer);
-		value = allocate(value, str);
-		ft_strcat(value, str);
-		free(str);
-		lx_advance(lexer);
-	}
+		collect_process(&str, &value, lexer);
 	if (lexer->c == quote)
 		lx_advance(lexer);
 	value = remove_char(value, quote);

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/25 20:03:40 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:14:51 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char	*remove_char(char *str, char charToRemmove);
 int		count_words(char *str);
 void	delete_node(t_cmd **head, t_cmd *prev);
 char	*replace_char(char *str, char ori, char rep);
+void	collect_process(char **str, char **value, t_lexer *lexer);
 
 /************* lexer.c ************/
 

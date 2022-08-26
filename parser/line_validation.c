@@ -6,86 +6,82 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/25 20:24:31 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:20:00 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
 
-
-int validate_rep_pipe(char *str)
-{
-  int i;
-  int count;
-
-  i = 0;
-  count = 0;
-  while (str[i])
-  {
-    if (str[i] == '\"' || str[i] == '\'')
-      count++;
-    if (count == 2)
-      count = 0;
-    if (count == 0)
-    {
-      if (str[i] == '|')
-      {
-        i++;
-        while (str[i] == ' ')
-          i++;
-        if (!ft_isalnum(str[i]))
-            return (0);
-        else if (!ft_isalnum(str[i]))
-          return (0);
-      }
-    }
-    i++;
-  }
-  return (1);
-}
-
 int	handle_repitition(char *str, int *i)
 {
 	while (str[*i] == ' ')
 		(*i)++;
-	if (!ft_isalnum(str[*i]))
+	if (!isalnum(str[*i]))
 		return (0);
-	else if (!ft_isalnum(str[*i]))
+	else if (!isalnum(str[*i]))
 		return (0);
 	return (1);
 }
 
-int validate_rep_redir(char *str, char redir)
+void	rep_handle(int *count, char *str, int i)
 {
-  int i;
-  int count;
+	if (str[i] == '\"' || str[i] == '\'')
+		(*count)++;
+	if (*count == 2)
+		*count = 0;
+}
 
-  i = 0;
-  count = 0;
-  while (str[i])
-  {
-    if (str[i] == '\"' || str[i] == '\'')
-      count++;
-    if (count == 2)
-      count = 0;
-    if (count == 0)
-    {
-      if (str[i] == redir && str[i + 1] != redir)
-      {
-        i++;
-        if (handle_repitition(str, &i) == 0)
-          return (0);
-      }
-      else if (str[i] == redir && str[i + 1] == redir)
-      {
-        i = i + 2;
-        if (handle_repitition(str, &i) == 0)
-          return (0);
-      }
-    }
-    i++;
-  }
-  return (1);
+int	validate_rep_pipe(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		rep_handle(&count, str, i);
+		if (count == 0)
+		{
+			if (str[i] == '|')
+			{
+				i++;
+				if (handle_repitition(str, &i) == 0)
+					return (0);
+			}
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	validate_rep_redir(char *str, char redir)
+{
+	int	i[2];
+
+	i[0] = 0;
+	i[1] = 0;
+	while (str[i[0]])
+	{
+		rep_handle(&i[1], str, i[0]);
+		if (i[1] == 0)
+		{
+			if (str[i[0]] == redir && str[i[0] + 1] != redir)
+			{
+				i[0]++;
+				if (handle_repitition(str, &i[0]) == 0)
+					return (0);
+			}
+			else if (str[i[0]] == redir && str[i[0] + 1] == redir)
+			{
+				i[0] = i[0] + 2;
+				if (handle_repitition(str, &i[0]) == 0)
+					return (0);
+			}
+		}
+		i[0]++;
+	}
+	return (1);
 }
 
 int	validate_line(char *str)

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:58:06 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/25 22:50:02 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:17:44 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,30 +74,6 @@ char	*expand_env(char *str, char quote, t_exec *exec)
 	return (str);
 }
 
-/*
-char	*expand_env(char *str, char quote, t_exec *exec)
-{
-	char	*tmp;
-	char	*env;
-	char	*placeholder;
-
-	if (quote == '\"')
-	{
-		while (find_char_index(str, '$') != -2)
-		{
-			env = find_str_env(str);
-			tmp = env;
-			env = ft_expand(env, exec->envp);
-			placeholder = str;
-			str = replace_env(str, tmp, env);
-			free(tmp);
-			free(env);
-			free(placeholder);
-		}
-	}
-	return (str);
-}*/
-
 t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec)
 {
 	char	*value;
@@ -105,27 +81,11 @@ t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec)
 
 	value = (char *)malloc(sizeof(char) + 1);
 	value[0] = '\0';
-	str = lx_getchar_as_str(lexer);
-	value = allocate(value, str);
-	ft_strcat(value, str);
-	free(str);
-	lx_advance(lexer);
+	collect_process(&str, &value, lexer);
 	if (lexer->c == '_')
-	{
-		str = lx_getchar_as_str(lexer);
-		value = allocate(value, str);
-		ft_strcat(value, str);
-		free(str);
-		lx_advance(lexer);
-	}
+		collect_process(&str, &value, lexer);
 	while (isalnum(lexer->c))
-	{   
-		str = lx_getchar_as_str(lexer);
-		value = allocate(value, str);
-		ft_strcat(value, str);
-		free(str);
-		lx_advance(lexer);
-	}
+		collect_process(&str, &value, lexer);
 	if (find_char_index(value, '$') != -2)
 		value = expand_env_word(value, 0, exec);
 	return (init_token(WORD, value, 0));

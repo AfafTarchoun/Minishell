@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:05:38 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/24 09:34:08 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:17:06 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,7 @@ t_token	*lx_collect_redirs(t_lexer *lexer, char redir)
 	while (lexer->c == redir)
 	{
 		count++;
-		str = lx_getchar_as_str(lexer);
-		value = allocate(value, str);
-		ft_strcat(value, str);
-		free(str);
-		lx_advance(lexer);
+		collect_process(&str, &value, lexer);
 	}
 	if (count == 1 && redir == '>')
 		return (init_token(REDIRIN, value, 0));
