@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/25 20:20:29 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:39:25 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	validate_pipes(char *str)
 
 int	check_line_correctness(char *str)
 {
+	if(str[0] == '\0')
+		return (0);
 	if (!validate_pipes(str))
 	{
 		printf("WARNING : |PIPE| Invalid\n");
