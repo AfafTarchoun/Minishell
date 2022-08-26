@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/26 21:48:08 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 23:05:42 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	handle_repitition(char *str, int *i)
 {
 	while (str[*i] == ' ')
 		(*i)++;
-	if (!isalnum(str[*i]))
+	if (!ft_isalnum(str[*i]))
 		return (0);
-	else if (!isalnum(str[*i]))
+	else if (!ft_isalnum(str[*i]))
 		return (0);
 	return (1);
 }

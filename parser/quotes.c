@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:07:18 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/26 21:15:29 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/26 23:05:55 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*allocate(char *value, char *str)
 {
-	value = ft_realloc(value, strlen(value)
-			+ strlen(str) + 1 * sizeof(char));
+	value = ft_realloc(value, ft_strlen(value)
+			+ ft_strlen(str) + 1 * sizeof(char));
 	return (value);
 }
 
