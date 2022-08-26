@@ -124,12 +124,57 @@ void	ft_get_env(t_exec *exec, char **env)
 	exec->env.exit_value = 0;
 }
 
+t_cmd *get_list_no_ws(t_cmd *cmd)
+{
+  t_cmd *lst;
+  t_cmd *head;
+
+  lst = init_cmd(cmd->tok);
+  head = lst;
+  cmd = cmd->next;
+  while (cmd)
+  {
+    if (cmd->tok->quote != ' ')
+    {
+      lst->next = cmd;
+      lst = lst->next;
+    }
+    cmd = cmd->next;
+  }
+  lst->next = NULL;
+  return (head);
+}
+
+void print_lst(t_cmd *cmd)
+{
+  while (cmd)
+  {
+    //printf("%s", cmd->tok->value);
+    printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
+    cmd = cmd->next;
+  }
+}
+
+t_cmd *return_list_cmd(char *line, t_exec exec)
+{
+  t_lexer *lexer;
+  t_cmd *cmd;
+  t_cmd *head;
+
+  lexer = init_lx(line);
+  cmd = create_lst_cmd(lexer, &exec);
+  free(lexer->str);
+  free(lexer);
+  head = cmd;
+  manage_tokens(&cmd);
+  return (head);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char *line;
-	t_lexer *lexer;
 	t_cmd *cmd;
-	t_cmd *head;
+	t_cmd *no_ws;
 	t_exec	exec;
 
 	(void)argc;
@@ -144,27 +189,16 @@ int	main(int argc, char **argv, char **envp)
 		add_history(line);
 		if (check_line_correctness(line))
 		{
-			lexer = init_lx(line);
-			cmd = create_lst_cmd(lexer, &exec);
-			free(lexer->str);
-			free(lexer);
-			head = cmd;
-			manage_tokens(&cmd);
-			cmd = head;
-			//  PRINTING
-			printf("Final :|");
-			while (cmd)
-			{
-				//comment either the first printf if you want the whole output line or comment the second printf if you want to see token by token
-				printf("%s", cmd->tok->value);
-				//printf("TOKEN (%d, %s, %c)\n", cmd->tok->type, cmd->tok->value, cmd->tok->quote);
-				cmd = cmd->next;
-			}
-			printf("|\n");
-			//////////////
-			free_cmd(&head);
-		}
-		else
-			free(line);
+		  cmd = return_list_cmd(line, &exec);
+		  no_ws = get_list_no_ws(cmd);
+		 //  PRINTING
+		 print_lst(cmd);
+		 printf("\naaaaaaaaaaaaaa\n\n");
+		 print_lst(no_ws);
+		 //////////////
+		 free_cmd(&cmd);
+	        }
+	    else
+	      free(line);
 	}
 }
