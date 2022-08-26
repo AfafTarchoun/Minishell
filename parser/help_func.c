@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:56:55 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/25 20:21:55 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:16:38 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	*ft_realloc(void *ptr, size_t size)
 	if (!new_ptr)
 		return (NULL);
 	ft_memcpy(new_ptr, ptr, size);
+	free(ptr);
 	return (new_ptr);
 }
 
