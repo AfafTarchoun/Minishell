@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/26 23:05:42 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:29:35 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,5 @@ int	validate_rep_redir(char *str, char redir)
 		}
 		i[0]++;
 	}
-	return (1);
-}
-
-int	validate_line(char *str)
-{
-	if (!validate_rep_pipe(str))
-		return (0);
-	if (!validate_rep_redir(str, '>'))
-		return (0);
-	if (!validate_rep_redir(str, '<'))
-		return (0);
 	return (1);
 }

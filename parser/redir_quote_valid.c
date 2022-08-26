@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/26 21:43:23 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:29:42 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,20 @@ int	validate_pipes(char *str)
 	return (1);
 }
 
+int	validate_line(char *str)
+{
+	if (!validate_rep_pipe(str))
+		return (0);
+	if (!validate_rep_redir(str, '>'))
+		return (0);
+	if (!validate_rep_redir(str, '<'))
+		return (0);
+	return (1);
+}
+
 int	check_line_correctness(char *str)
 {
-	if(str[0] == '\0')
+	if (str[0] == '\0')
 		return (0);
 	if (!validate_pipes(str))
 	{

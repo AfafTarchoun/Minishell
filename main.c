@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 00:23:29 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:28:22 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,4 +206,3 @@ int	main(int argc, char **argv, char **envp)
 	      free(line);
 	}
 }
- 
