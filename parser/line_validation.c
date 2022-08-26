@@ -6,22 +6,11 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 00:29:35 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:48:11 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
-
-int	handle_repitition(char *str, int *i)
-{
-	while (str[*i] == ' ')
-		(*i)++;
-	if (!ft_isalnum(str[*i]))
-		return (0);
-	else if (!ft_isalnum(str[*i]))
-		return (0);
-	return (1);
-}
 
 void	rep_handle(int *count, char *str, int i)
 {
@@ -31,10 +20,29 @@ void	rep_handle(int *count, char *str, int i)
 		*count = 0;
 }
 
+void	ignore_quotes(char *str, int *i, char quote, int *flag)
+{
+	if (str[*i] == quote)
+	{
+		(*i)++;
+		while (str[*i] != quote)
+			(*i)++;
+		(*i)++;
+		*flag = 1;
+	}
+}
+
 int	handle_rep_pipe(char *str, int *i)
 {
+	int	flag;
+	
+	flag = 0;
 	while (str[*i] == ' ')
 		(*i)++;
+	ignore_quotes(str, i, '\"', &flag);
+	ignore_quotes(str, i, '\'', &flag);
+	if (flag == 1)
+		return (1);
 	if (!ft_isalnum(str[*i]) && str[*i] != '>' && str[*i] != '<')
 		return (0);
 	return (1);
@@ -52,15 +60,33 @@ int	validate_rep_pipe(char *str)
 		rep_handle(&count, str, i);
 		if (count == 0)
 		{
-			if (str[i] == '|')
-			{
-				i++;
-				if (handle_rep_pipe(str, &i) == 0)
-					return (0);
-			}
+		if (str[i] == '|')
+		{
+			i++;
+			if (handle_rep_pipe(str, &i) == 0)
+				return (0);
+		}
 		}
 		i++;
+		if (i > ft_strlen(str))
+		i = ft_strlen(str);
 	}
+	return (1);
+}
+
+int	handle_repitition(char *str, int *i)
+{
+	int	flag;
+	
+	flag = 0;
+	while (str[*i] == ' ')
+		(*i)++;
+	ignore_quotes(str, i, '\"', &flag);
+	ignore_quotes(str, i, '\'', &flag);
+	if (flag == 1)
+		return (1);
+	if (!ft_isalnum(str[*i]))
+		return (0);
 	return (1);
 }
 
