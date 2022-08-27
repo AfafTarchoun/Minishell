@@ -38,33 +38,36 @@ void	ignore_quotes(char *str, int *i, char quote, int *flag)
 	}
 }
 
-int	validate_pipes(char *str)
+int validate_pipes(char *str)
 {
-	int	i;
-	int	count;
-	int	flag;
-	int	value;
+  int i;
+  int count;
+  int flag;
 
-	i = 0;
-	count = 0;
-	value = 1;
-	flag = 0;
-	while (str[i])
-	{
-		ignore_quotes(str, &i, '\"', &flag);
-		ignore_quotes(str, &i, '\'', &flag);
-		if (str[i] == '|')
-			count++;
-		if (str[i] == '|' && str[i + 1] == '\0')
-			return (0);
-		else
-		count = 0;
-		if (count > 1)
-			return (0);
-		i++;
-	}
-	return (1);
+  i = 0;
+  count = 0;
+  flag = 0;
+  if (str[0] == '|')
+    return (0);
+  while (str[i])
+  {
+    ignore_quotes(str, &i, '\"', &flag);
+    ignore_quotes(str, &i, '\'', &flag);
+    if (str[i] == '|')
+      count++;
+    if (str[i] == '|' && str[i + 1] == '\0')
+      return (0);
+    if (str[i] == '|' && str[i + 1] == '|')
+      return (0);
+    else
+      count = 0;
+    if (count > 1)
+      return (0);
+    i++;
+  }
+  return(1);
 }
+
 
 int	validate_line(char *str)
 {
