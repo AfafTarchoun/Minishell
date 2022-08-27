@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 00:44:58 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:38:45 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ int		ft_strcmp(char *s1, char *s2);
 /************* free_func.c ************/
 
 void	free_cmd(t_cmd **cmd);
+void	free_cmd_ws(t_cmd **cmd);
 int		validate_rep_pipe(char *str);
 int		validate_rep_redir(char *str, char redir);
 

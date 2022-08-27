@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 00:28:22 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:39:05 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,11 @@ t_cmd	*get_list_no_ws(t_cmd *cmd)
 	t_cmd *head;
 
 	if (cmd->tok->quote != ' ')
-		lst = init_cmd(cmd->tok);
+	lst = init_cmd(cmd->tok);
 	else
 	{
 		cmd = cmd->next;
-		lst = init_cmd(cmd->tok);
+	lst = init_cmd(cmd->tok);
 	}
 	head = lst;
 	cmd = cmd->next;
@@ -178,7 +178,6 @@ t_cmd	*return_list_cmd(char *line, t_exec exec)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
-	t_cmd	*tmp;
 	t_cmd	*cmd;
 	t_cmd	*no_ws;
 	t_exec	exec;
@@ -196,11 +195,10 @@ int	main(int argc, char **argv, char **envp)
 		if (check_line_correctness(line))
 		{
 			cmd = return_list_cmd(line, exec);
-			tmp = no_ws;
 			no_ws = get_list_no_ws(cmd);
 			print_lst(no_ws);
 			free_cmd(&cmd);
-			free(tmp);
+			free_cmd_ws(&no_ws);
 	    }
 	    else
 	      free(line);
