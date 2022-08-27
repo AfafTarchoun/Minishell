@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 01:38:45 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 02:37:00 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,4 +190,5 @@ char	*ft_mystrdu_norm(char *str, char *s1, int i, int j);
 char	*ft_get_expand_env(char *str);
 int		ft_find_variable_index(char *str, char c);
 int		ft_find_last_character(char *str, char c);
+void 	ignore_quotes(char *str, int *i, char quote, int *flag);
 #endif
