@@ -65,27 +65,22 @@ void	manage_tokens(t_cmd **cmd_old)
 	}
 }
 
-t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec)
+t_token *lx_get_next_tok(t_lexer *lexer, t_exec *exec)
 {
-	t_token	*tok;
+  t_token *tok;
 
-	while (lexer->c && lexer->i < ft_strlen(lexer->str))
-	{
-		if (lexer->c == ' ')
-			return (lx_collect_spaces(lexer));
-		if (ft_isalnum(lexer->c))
-			return (lx_collect_str(lexer));
-		if (lexer->c == '$')
-			return (lx_collect_env(lexer, exec));
-		if (lexer->c == '\"' || lexer->c == '\'')
-			return (lx_collect_quote(lexer, lexer->c, exec));
-		if (is_op(lexer->c))
-			return (lx_handle_operations(lexer));
-		if (!ft_isalnum(lexer->c) && !is_op(lexer->c))
-		{
-			tok = init_token(SPECIALCHAR, lx_getchar_as_str(lexer), 0);
-			return (lx_advance_wtok(lexer, tok));
-		}
-	}
-	return (NULL);
+  while (lexer->c && lexer->i < strlen(lexer->str))
+  {
+    if (lexer->c == ' ')
+      return (lx_collect_spaces(lexer));
+    if (lexer->c == '\"' || lexer->c == '\'')
+      return (lx_collect_quote(lexer, lexer->c, exec));
+    if (lexer->c == '$')
+      return (lx_collect_env(lexer, exec));
+    if (lexer->c != ' ' && !is_op(lexer->c))
+      return (lx_collect_str(lexer));
+    if (is_op(lexer->c))
+      return (lx_handle_operations(lexer));
+  } 
+  return (NULL);
 }
