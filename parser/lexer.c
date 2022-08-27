@@ -48,14 +48,15 @@ char	*lx_getchar_as_str(t_lexer *lexer)
 	return (str);
 }
 
-t_token	*lx_collect_str(t_lexer *lexer)
+t_token *lx_collect_str(t_lexer *lexer)
 {
-	char	*value;
-	char	*str;
+  char *value;
+  char *str;
 
-	value = (char *)malloc(sizeof(char) + 1);
-	value[0] = '\0';
-	while (ft_isalnum(lexer->c))
-		collect_process(&str, &value, lexer);
-	return (init_token(WORD, value, 0));
+  value = (char *)malloc(sizeof(char) + 1);
+  value[0] = '\0';
+  while (lexer->c != ' ' && !is_op(lexer->c) 
+    && lexer->c != '\"' && lexer->c != '\'' && lexer->c)
+    collect_process(&str, &value, lexer);
+  return (init_token(WORD, value, 0));
 }
