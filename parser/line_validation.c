@@ -63,20 +63,20 @@ int	validate_rep_pipe(char *str)
 	return (1);
 }
 
-int	handle_repitition(char *str, int *i)
+int handle_repitition(char *str, int *i)
 {
-	int	flag;
-
-	flag = 0;
-	while (str[*i] == ' ')
-		(*i)++;
-	ignore_quotes(str, i, '\"', &flag);
-	ignore_quotes(str, i, '\'', &flag);
-	if (flag == 1)
-		return (1);
-	if (!ft_isalnum(str[*i]))
-		return (0);
-	return (1);
+  int flag;
+  
+  flag = 0;
+  while (str[*i] == ' ')
+    (*i)++;
+  ignore_quotes(str, i, '\"', &flag);
+  ignore_quotes(str, i, '\'', &flag);
+  if (flag == 1)
+    return (1);
+  if (!isalnum(str[*i]) && str[*i] != '.')
+    return (0);
+  return (1);
 }
 
 int	validate_rep_redir(char *str, char redir)
