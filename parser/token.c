@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 01:12:38 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:57:27 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ void	manage_tokens(t_cmd **cmd_old)
 
 t_token *lx_get_next_tok(t_lexer *lexer, t_exec *exec)
 {
-  t_token *tok;
-
-  while (lexer->c && lexer->i < strlen(lexer->str))
+  while (lexer->c && lexer->i < ft_strlen(lexer->str))
   {
     if (lexer->c == ' ')
       return (lx_collect_spaces(lexer));

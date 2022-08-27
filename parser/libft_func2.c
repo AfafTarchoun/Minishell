@@ -6,11 +6,18 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 09:44:15 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/22 11:40:33 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:56:52 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c < 58)
+		return (1);
+	return (0);
+}
 
 int	ft_isalnum(int s)
 {

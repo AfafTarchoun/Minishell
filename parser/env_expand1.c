@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:58:06 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/26 21:17:44 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:59:02 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char *handle_num_env(char *str)
   int i;
   int j;
   
-  len = strlen(str);
+  len = ft_strlen(str);
   result = (char *)malloc(sizeof(char) * (len - 2) + 1);
   i = 2;
   j = 0;
@@ -91,7 +91,6 @@ char *expand_env(char *str, char quote, t_exec *exec)
 {
   char *tmp;
   char *env;
-  char *placeholder;
   
   if (quote == '\"')
   {
