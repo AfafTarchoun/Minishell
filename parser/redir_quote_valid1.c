@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:52:57 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 02:36:07 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 02:43:31 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	validate_repetition(char *str, char redir1, char redir2)
 	int	count;
 	int	flag;
 	int	value;
-	
+
 	i = 0;
 	count = 0;
 	value = 1;

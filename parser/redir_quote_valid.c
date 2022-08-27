@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 02:39:08 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 02:48:46 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,24 @@ void	ignore_inside_quotes(char str, int *value, int *flag)
 	}
 }
 
-int validate_pipes(char *str)
+void	ignore_quotes(char *str, int *i, char quote, int *flag)
 {
-	int i;
-	int count;
-	int flag;
-	int value;
+	if (str[*i] == quote)
+	{
+		(*i)++;
+		while (str[*i] != quote)
+			(*i)++;
+		(*i)++;
+		*flag = 1;
+	}
+}
+
+int	validate_pipes(char *str)
+{
+	int	i;
+	int	count;
+	int	flag;
+	int	value;
 
 	i = 0;
 	count = 0;
@@ -42,14 +54,16 @@ int validate_pipes(char *str)
 		ignore_quotes(str, &i, '\"', &flag);
 		ignore_quotes(str, &i, '\'', &flag);
 		if (str[i] == '|')
-		count++;
+			count++;
+		if (str[i] == '|' && str[i + 1] == '\0')
+			return (0);
 		else
 		count = 0;
 		if (count > 1)
-		return (0);
+			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 int	validate_line(char *str)

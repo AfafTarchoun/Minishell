@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 02:38:26 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/27 02:45:56 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,10 @@ void	rep_handle(int *count, char *str, int i)
 		*count = 0;
 }
 
-void	ignore_quotes(char *str, int *i, char quote, int *flag)
-{
-	if (str[*i] == quote)
-	{
-		(*i)++;
-		while (str[*i] != quote)
-			(*i)++;
-		(*i)++;
-		*flag = 1;
-	}
-}
-
 int	handle_rep_pipe(char *str, int *i)
 {
 	int	flag;
-	
+
 	flag = 0;
 	while (str[*i] == ' ')
 		(*i)++;
@@ -78,7 +66,7 @@ int	validate_rep_pipe(char *str)
 int	handle_repitition(char *str, int *i)
 {
 	int	flag;
-	
+
 	flag = 0;
 	while (str[*i] == ' ')
 		(*i)++;
