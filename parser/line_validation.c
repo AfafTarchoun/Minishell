@@ -6,19 +6,11 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 21:04:09 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:55:53 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
-
-void	rep_handle(int *count, char *str, int i)
-{
-	if (str[i] == '\"' || str[i] == '\'')
-		(*count)++;
-	if (*count == 2)
-		*count = 0;
-}
 
 int	handle_rep_pipe(char *str, int *i)
 {
@@ -74,8 +66,11 @@ int	handle_repitition(char *str, int *i)
 	ignore_quotes(str, i, '\'', &flag);
 	if (flag == 1)
 		return (1);
-	if (!ft_isalnum(str[*i]) && str[*i] != '.')
+	if (!isalnum(str[*i]) && str[*i] != '.')
+	{
+		printf("hna %c\n", str[*i]);
 		return (0);
+	}
 	return (1);
 }
 
@@ -93,7 +88,10 @@ int	validate_rep_redir(char *str, char redir)
 		{
 			i[0]++;
 			if (handle_repitition(str, &i[0]) == 0)
+			{
+				printf("hna %s\n", str);
 				return (0);
+			}
 		}
 		else if (str[i[0]] == redir && str[i[0] + 1] == redir)
 		{

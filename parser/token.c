@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 21:03:59 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:49:55 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	manage_tokens(t_cmd **cmd_old)
 			prev = cmd;
 		prev = cmd;
 		if (cmd)
-			cmd = cmd->next;
+		cmd = cmd->next;
 	}
 }
 

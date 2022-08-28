@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 20:14:54 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:23:29 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ void	ft_get_env(t_exec *exec, char **env)
 
 t_cmd	*get_list_no_ws(t_cmd *cmd)
 {
-	t_cmd *lst;
-	t_cmd *head;
+	t_cmd	*lst;
+	t_cmd	*head;
 
 	if (cmd->tok->quote != ' ')
 		lst = init_cmd(cmd->tok);

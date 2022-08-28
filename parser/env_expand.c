@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:09:23 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 21:05:15 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:53:37 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ char	*replace_env(char *str, char *find, char *replace)
 	char	*result;
 	int		lens_i[5];
 
-	lens_i[0] = 0;
 	lens_i[1] = strlen(replace);
 	lens_i[2] = strlen(find);
 	lens_i[3] = 0;

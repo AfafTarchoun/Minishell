@@ -6,32 +6,18 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 02:28:37 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:50:25 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
-
-void	ignore_inside_quotes(char str, int *value, int *flag)
-{
-	if (str == '\'' || str == '\"')
-	{
-		*value = 0;
-		(*flag)++;
-	}
-	if (*flag == 2)
-	{
-		*flag = 0;
-		*value = 1;
-	}
-}
 
 void	ignore_quotes(char *str, int *i, char quote, int *flag)
 {
 	if (str[*i] == quote)
 	{
 		(*i)++;
-		while (str[*i] != quote)
+		while (str[*i] != quote && str[*i])
 			(*i)++;
 		(*i)++;
 		*flag = 1;
@@ -70,9 +56,15 @@ int	validate_pipes(char *str)
 int	validate_line(char *str)
 {
 	if (!validate_rep_pipe(str))
+	{
+		printf("hna1\n");
 		return (0);
+	}
 	if (!validate_rep_redir(str, '>'))
+	{
+		printf("hna2\n");
 		return (0);
+	}
 	if (!validate_rep_redir(str, '<'))
 		return (0);
 	return (1);
