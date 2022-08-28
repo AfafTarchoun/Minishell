@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:52:57 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 02:50:02 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:49:38 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	validate_repetition(char *str, char redir1, char redir2)
 	flag = 0;
 	while (str[i])
 	{
-		ignore_quotes(str, &i, '\"', &flag);
-		ignore_quotes(str, &i, '\'', &flag);
+		properly_ignore(str, &i, &flag);
 		if (str[i] == redir1)
 		{
 			if (str[i + 1] == redir2)

@@ -6,11 +6,20 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 22:24:25 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:07:06 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
+
+void	properly_ignore(char *str, int *i, int *flag)
+{
+	while (str[*i] == '\"' || str[*i] == '\'')
+	{
+		ignore_quotes(str, i, '\"', flag);
+		ignore_quotes(str, i, '\'', flag);
+	}
+}
 
 int	handle_rep_pipe(char *str, int *i)
 {
@@ -19,8 +28,7 @@ int	handle_rep_pipe(char *str, int *i)
 	flag = 0;
 	while (str[*i] == ' ')
 		(*i)++;
-	ignore_quotes(str, i, '\"', &flag);
-	ignore_quotes(str, i, '\'', &flag);
+	properly_ignore(str, i, &flag);
 	if (flag == 1)
 		return (1);
 	if (!ft_isalnum(str[*i]) && str[*i] != '>' && str[*i] != '<')
@@ -37,8 +45,7 @@ int	validate_rep_pipe(char *str)
 	count = 0;
 	while (str[i])
 	{
-		ignore_quotes(str, &i, '\"', &count);
-		ignore_quotes(str, &i, '\'', &count);
+		properly_ignore(str, &i, &count);
 		if (count == 0)
 		{
 			if (str[i] == '|')
@@ -50,7 +57,7 @@ int	validate_rep_pipe(char *str)
 		}
 		i++;
 		if (i > ft_strlen(str))
-			i = ft_strlen(str);
+		i = ft_strlen(str);
 	}
 	return (1);
 }
@@ -62,11 +69,10 @@ int	handle_repitition(char *str, int *i)
 	flag = 0;
 	while (str[*i] == ' ')
 		(*i)++;
-	ignore_quotes(str, i, '\"', &flag);
-	ignore_quotes(str, i, '\'', &flag);
+	properly_ignore(str, i, &flag);
 	if (flag == 1)
 		return (1);
-	if (str[*i] && !ft_isalnum(str[*i]) && str[*i] != '.')
+	if (!ft_isalnum(str[*i]) && str[*i] != '.')
 		return (0);
 	return (1);
 }
@@ -79,8 +85,7 @@ int	validate_rep_redir(char *str, char redir)
 	i[1] = 0;
 	while (str[i[0]])
 	{
-		ignore_quotes(str, &i[0], '\"', &i[1]);
-		ignore_quotes(str, &i[0], '\'', &i[1]);
+		properly_ignore(str, &i[0], &i[1]);
 		if (str[i[0]] == redir && str[i[0] + 1] != redir)
 		{
 			i[0]++;

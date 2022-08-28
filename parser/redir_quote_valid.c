@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 21:50:25 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:49:10 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	validate_pipes(char *str)
 		return (0);
 	while (str[i])
 	{
-		ignore_quotes(str, &i, '\"', &count_flag[1]);
-		ignore_quotes(str, &i, '\'', &count_flag[1]);
+		properly_ignore(str, &i, &count_flag[1]);
 		if (str[i] == '|')
 			count_flag[0]++;
 		if (str[i] == '|' && str[i + 1] == '\0')
