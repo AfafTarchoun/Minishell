@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:22 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 01:39:05 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 20:14:54 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,11 @@ t_cmd	*get_list_no_ws(t_cmd *cmd)
 	t_cmd *head;
 
 	if (cmd->tok->quote != ' ')
-	lst = init_cmd(cmd->tok);
+		lst = init_cmd(cmd->tok);
 	else
 	{
 		cmd = cmd->next;
-	lst = init_cmd(cmd->tok);
+		lst = init_cmd(cmd->tok);
 	}
 	head = lst;
 	cmd = cmd->next;

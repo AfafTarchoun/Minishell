@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:58:06 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 02:33:46 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:03:14 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	handle_env_replace(char **str, char *env, int flag, t_exec *exec)
 	if (flag == 1)
 		env = ft_expand(env, exec->envp);
 	else if (flag == 0)
-		env = strdup("\200");
+		env = ft_strdup("\200");
 	placeholder = *str;
 	*str = replace_env(*str, tmp, env);
 	free(tmp);

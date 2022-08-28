@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:09:23 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/24 09:32:36 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 21:05:15 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,30 @@ int	get_count(char *str, char *find, int *io)
 char	*replace_env(char *str, char *find, char *replace)
 {
 	char	*result;
-	int		i;
-	int		lens[3];
+	int		lens_i[5];
 
-	lens[0] = 0;
-	lens[1] = ft_strlen(replace);
-	lens[2] = ft_strlen(find);
-	i = 0;
-	lens[0] = get_count(str, find, &i);
-	result = (char *)malloc(i + lens[0] * (lens[1] - lens[2]) + 1);
-	i = 0;
+	lens_i[0] = 0;
+	lens_i[1] = strlen(replace);
+	lens_i[2] = strlen(find);
+	lens_i[3] = 0;
+	lens_i[0] = get_count(str, find, &lens_i[3]);
+	result = (char *)malloc(lens_i[3] + lens_i[0]
+			* (lens_i[1] - lens_i[2]) + 1);
+	lens_i[3] = 0;
+	lens_i[4] = 0;
 	while (*str)
 	{
-		if (ft_strstr(str, find) == str)
+		if (ft_strstr(str, find) == str && lens_i[4] == 0)
 		{
-			ft_strcpy(&result[i], replace);
-			i += lens[1];
-			str += lens[2];
+			lens_i[4] = 1;
+			ft_strcpy(&result[lens_i[3]], replace);
+			lens_i[3] += lens_i[1];
+			str += lens_i[2];
 		}
 		else
-		result[i++] = *str++;
+		result[lens_i[3]++] = *str++;
 	}
-	result[i] = '\0';
+	result[lens_i[3]] = '\0';
 	return (result);
 }
 
@@ -121,11 +123,14 @@ char	*expand_env_word(char *str, char quote, t_exec *exec)
 {
 	char	*tmp;
 
-	if (quote != '\'')
+	if (str[1] != '\0')
 	{
-		tmp = str;
-		str = ft_expand(str, exec->envp);
-		free(tmp);
+		if (quote != '\'')
+		{
+			tmp = str;
+			str = ft_expand(str, exec->envp);
+			free(tmp);
+		}
 	}
 	return (str);
 }
