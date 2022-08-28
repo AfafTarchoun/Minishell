@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:04:01 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 19:57:27 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 02:29:34 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,20 @@ void	manage_tokens(t_cmd **cmd_old)
 	}
 }
 
-t_token *lx_get_next_tok(t_lexer *lexer, t_exec *exec)
+t_token	*lx_get_next_tok(t_lexer *lexer, t_exec *exec)
 {
-  while (lexer->c && lexer->i < ft_strlen(lexer->str))
-  {
-    if (lexer->c == ' ')
-      return (lx_collect_spaces(lexer));
-    if (lexer->c == '\"' || lexer->c == '\'')
-      return (lx_collect_quote(lexer, lexer->c, exec));
-    if (lexer->c == '$')
-      return (lx_collect_env(lexer, exec));
-    if (lexer->c != ' ' && !is_op(lexer->c))
-      return (lx_collect_str(lexer));
-    if (is_op(lexer->c))
-      return (lx_handle_operations(lexer));
-  } 
-  return (NULL);
+	while (lexer->c && lexer->i < ft_strlen(lexer->str))
+	{
+		if (lexer->c == ' ')
+			return (lx_collect_spaces(lexer));
+		if (lexer->c == '\"' || lexer->c == '\'')
+			return (lx_collect_quote(lexer, lexer->c, exec));
+		if (lexer->c == '$')
+			return (lx_collect_env(lexer, exec));
+		if (lexer->c != ' ' && !is_op(lexer->c))
+			return (lx_collect_str(lexer));
+		if (is_op(lexer->c))
+			return (lx_handle_operations(lexer));
+	}
+	return (NULL);
 }

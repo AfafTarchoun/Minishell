@@ -6,7 +6,7 @@
 #    By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:10:29 by atarchou          #+#    #+#              #
-#    Updated: 2022/08/25 20:21:44 by atarchou         ###   ########.fr        #
+#    Updated: 2022/08/28 02:34:11 by atarchou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = parser/cmd.c\
 		parser/free_func.c\
 		parser/redir_quote_valid.c\
 		parser/redir_quote_valid1.c\
+		parser/collect_env.c\
 		main.c\
 
 $(NAME) : $(SRCS)

@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 20:16:29 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 02:45:56 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 02:31:31 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,20 @@ int	validate_rep_pipe(char *str)
 	return (1);
 }
 
-int handle_repitition(char *str, int *i)
+int	handle_repitition(char *str, int *i)
 {
-  int flag;
-  
-  flag = 0;
-  while (str[*i] == ' ')
-    (*i)++;
-  ignore_quotes(str, i, '\"', &flag);
-  ignore_quotes(str, i, '\'', &flag);
-  if (flag == 1)
-    return (1);
-  if (!isalnum(str[*i]) && str[*i] != '.')
-    return (0);
-  return (1);
+	int	flag;
+
+	flag = 0;
+	while (str[*i] == ' ')
+		(*i)++;
+	ignore_quotes(str, i, '\"', &flag);
+	ignore_quotes(str, i, '\'', &flag);
+	if (flag == 1)
+		return (1);
+	if (!ft_isalnum(str[*i]) && str[*i] != '.')
+		return (0);
+	return (1);
 }
 
 int	validate_rep_redir(char *str, char redir)

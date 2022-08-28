@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:49:34 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 19:57:03 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 02:35:01 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	*expand_env_word(char *str, char quote, t_exec *exec);
 char	*ft_expand(char *expand, char **envp);
 char	*expand_env(char *str, char quote, t_exec *exec);
 t_token	*lx_collect_env(t_lexer *lexer, t_exec *exec);
+char	*handle_num_env(char *str);
 
 /************* help_func.c ************/
 
@@ -159,7 +160,7 @@ int		ft_isalnum(int s);
 int		ft_isspace(int c);
 char	*ft_strcat(char *dest, char *src);
 int		ft_strcmp(char *s1, char *s2);
-int	ft_isdigit(int c);
+int		ft_isdigit(int c);
 
 /************* free_func.c ************/
 

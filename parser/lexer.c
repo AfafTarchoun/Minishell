@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:00:53 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 20:13:04 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 02:31:39 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*lx_collect_str(t_lexer *lexer)
 
 	value = (char *)malloc(sizeof(char) + 1);
 	value[0] = '\0';
-	while (lexer->c != ' ' && !is_op(lexer->c) 
+	while (lexer->c != ' ' && !is_op(lexer->c)
 		&& lexer->c != '\"' && lexer->c != '\''
 		&& lexer->c != '$' && lexer->c)
 		collect_process(&str, &value, lexer);

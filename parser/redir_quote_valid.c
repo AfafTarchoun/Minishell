@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/27 02:48:46 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/28 02:28:37 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,34 @@ void	ignore_quotes(char *str, int *i, char quote, int *flag)
 	}
 }
 
-int validate_pipes(char *str)
+int	validate_pipes(char *str)
 {
-  int i;
-  int count;
-  int flag;
+	int	i;
+	int	count_flag[2];
 
-  i = 0;
-  count = 0;
-  flag = 0;
-  if (str[0] == '|')
-    return (0);
-  while (str[i])
-  {
-    ignore_quotes(str, &i, '\"', &flag);
-    ignore_quotes(str, &i, '\'', &flag);
-    if (str[i] == '|')
-      count++;
-    if (str[i] == '|' && str[i + 1] == '\0')
-      return (0);
-    if (str[i] == '|' && str[i + 1] == '|')
-      return (0);
-    else
-      count = 0;
-    if (count > 1)
-      return (0);
-    i++;
-  }
-  return(1);
+	i = 0;
+	count_flag[0] = 0;
+	count_flag[1] = 0;
+	if (str[0] == '|')
+		return (0);
+	while (str[i])
+	{
+		ignore_quotes(str, &i, '\"', &count_flag[1]);
+		ignore_quotes(str, &i, '\'', &count_flag[1]);
+		if (str[i] == '|')
+			count_flag[0]++;
+		if (str[i] == '|' && str[i + 1] == '\0')
+			return (0);
+		if (str[i] == '|' && str[i + 1] == '|')
+			return (0);
+		else
+			count_flag[0] = 0;
+		if (count_flag[0] > 1)
+			return (0);
+		i++;
+	}
+	return (1);
 }
-
 
 int	validate_line(char *str)
 {
