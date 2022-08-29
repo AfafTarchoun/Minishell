@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:51:54 by atarchou          #+#    #+#             */
-/*   Updated: 2022/08/28 22:49:10 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/08/29 01:02:21 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,9 @@ int	validate_pipes(char *str)
 int	validate_line(char *str)
 {
 	if (!validate_rep_pipe(str))
-	{
-		printf("hna1\n");
 		return (0);
-	}
 	if (!validate_rep_redir(str, '>'))
-	{
-		printf("hna2\n");
 		return (0);
-	}
 	if (!validate_rep_redir(str, '<'))
 		return (0);
 	return (1);
