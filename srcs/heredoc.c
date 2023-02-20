@@ -6,7 +6,7 @@
 /*   By: atarchou <atarchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:14:50 by achahdan          #+#    #+#             */
-/*   Updated: 2022/11/21 01:09:56 by atarchou         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:27:19 by atarchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ char	*expand_line(char **line, int is_expand)
 int	write_2_fd(int fd, char *delimiter, int is_expand)
 {
 	char	*line;
-	//int		std_in;
+	int		std_in;
 
 	g_data.loc = HDOC;
-	// std_in = dup(0);
+	std_in = dup(0);
 	line = ft_readlinee("> ");
 	while (line)
 	{
@@ -66,8 +66,8 @@ int	write_2_fd(int fd, char *delimiter, int is_expand)
 		free(line);
 		line = ft_readlinee("> ");
 	}
-	// dup2(std_in, 0);
-	// close(std_in);
+	dup2(std_in, 0);
+	close(std_in);
 	if (g_data.sig_caught)
 		return (-2);
 	return (0);
@@ -87,7 +87,7 @@ int	write_heredoc_2_file(t_cmd *cmd)
 			|| ft_strchr(heredoc_lst->name, '\"'))
 			is_expand = 0;
 		remove_quotess(heredoc_lst->name);
-		close(cmd->heredoc); // to_explain
+		close(cmd->heredoc);
 		cmd->heredoc = open(cmd->heredoc_path,
 				O_CREAT | O_RDWR | O_TRUNC | O_APPEND, 0644);
 		if (cmd->heredoc == -1)
