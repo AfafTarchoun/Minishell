@@ -22,7 +22,7 @@ To compile Minishell, make sure you have the `gcc` compiler and the `GNU Make` u
 1. Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/AfafTarchoun/minishell.git
+git clone https://github.com/AfafTarchoun/Minishell.git
 cd minishell
 ```
 
