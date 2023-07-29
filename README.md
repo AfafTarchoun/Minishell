@@ -1,7 +1,7 @@
 # Minishell :shell: - A Simple Shell Implementation
 ## As beautiful as a shell
 ### This project is about creating a simple shell. Yes, your own little bash
-** Minishell is a simple shell implementation written in C, allowing users to interact with their operating system using command-line commands. It supports various features like executing executables, managing environment variables, implementing redirections, pipes, and handling signals. This project is part of the 42 School curriculum.**
+**Minishell is a simple shell implementation written in C, allowing users to interact with their operating system using command-line commands. It supports various features like executing executables, managing environment variables, implementing redirections, pipes, and handling signals. This project is part of the 42 School curriculum.**
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -9,10 +9,7 @@
 3. [Usage](#usage)
 4. [Features](#features)
 5. [Built-in Commands](#built-in-commands)
-6. [External Commands](#external-commands)
-7. [Known Issues](#known-issues)
-8. [Contributing](#contributing)
-9. [License](#license)
+6. [Contributing](#contributing)
 
 ## Introduction
 
@@ -43,3 +40,36 @@ Run the minishell executable to start the shell:
 ./Minishell
 ```
 You will see the Minishell prompt, where you can type in your commands.
+
+To exit Minishell, use the exit command:
+
+```bash
+minishell$ exit
+```
+## Features
+Minishell provides the following features:
+
+- Displaying a prompt to interact with the user.
+- Maintaining a command history for easy navigation.
+- Searching and executing the right executable using the PATH variable or absolute/relative paths.
+- Handling single and double quotes to prevent interpretation of metacharacters.
+- Implementing redirections for input (<) and output (>), as well as append mode (>>).
+- Supporting pipes (|) to chain commands together.
+- Expanding environment variables ($VAR) to their values.
+- Expanding $? to the exit status of the most recently executed foreground pipeline.
+- Handling signals ctrl-C, ctrl-D, and ctrl-\ as expected in a shell.
+- Implementing various built-in commands (see Built-in Commands).
+
+## Built-in Commands
+Minishell supports the following built-in commands:
+
+- **echo** : Display arguments to the standard output, with the option -n to omit the trailing newline.
+- **cd** : Change the current directory using a relative or absolute path.
+- **pwd** : Display the absolute pathname of the current working directory.
+- **export** : Set an environment variable with the format key=value.
+- **unset** : Unset/delete an environment variable.
+- **env** : Display the current environment variables.
+- **exit** : Exit the shell.
+
+## Contributing
+Contributions to Minishell are welcome! If you find any issues or have improvements to suggest, please feel free to open an issue or submit a pull request.
